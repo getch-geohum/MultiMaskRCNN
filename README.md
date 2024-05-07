@@ -1,5 +1,8 @@
 This repository trains MaskRCNN for instance segmentation of dwelling objects from different FDP settlement areas
 
+# Instllation
+to create the environment follow instructions on "Instruction_Manual.pdf"
+
 ## Usage 
 First try to change parameters in configs.py file and then 
 
