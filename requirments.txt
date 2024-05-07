@@ -1,0 +1,13 @@
+numpy
+scipy
+torch
+scikit-learn
+scikit-image
+matplotlib
+rasterio
+shapely
+pillow
+geopandas
+pandas
+joblib
+
