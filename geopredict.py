@@ -222,7 +222,7 @@ def main(args):
         model.to(device)
 
     if args.image_type == 'chips':
-        files = glob(f'{args.data_dir}/test/images/*.tif')
+        files = glob(f'{args.data_dir}/images/*.tif')
         print(f'Got a total of {len(files)} image chips!')
 
         if len(files) <= 0:
@@ -263,10 +263,10 @@ def main(args):
     
 def parse_args():
     parser = argparse.ArgumentParser('MaskRCNN prediction based on multidataset image training and provides prediction as ESRI shapefile')
-    parser.add_argument("--save_dir", type=str, default="/home/getch/ssl/MaskRCNN_output/preds", help='Directory to save outputs')
-    parser.add_argument('--data_dir', type=str, default="/home/getch/DATA/SPOT06", help='directory where data is available')
+    parser.add_argument("--save_dir", type=str, default="/MaskRCNN_output/preds", help='Directory to save outputs')
+    parser.add_argument('--data_dir', type=str, default="/DATA/SPOT06", help='directory where data is available')
     parser.add_argument('--weight', type=str,help='saved model weight')
-    parser.add_argument('--model', type=str, default='/home/getch/ssl/MaskRCNN_output/model/model_model_first.pt', help='saved_model')
+    parser.add_argument('--model', type=str, default='/MaskRCNN_output/model/model_model_first.pt', help='saved_model')
     parser.add_argument('--name', type=str, default='spot_pred_s06_full_ep50_mask05_maskiou08_bbox_nms08_bbx03')
     parser.add_argument('--mask_treshold', type=float, default=0.5, help='cut of value to convert probability to hard binary class')
     parser.add_argument('--score_treshold', type=float, default=0.6, help='Cut of point for objectness confidence of predicted objetcs')
