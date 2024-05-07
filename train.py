@@ -118,7 +118,7 @@ class CampDataset(torch.utils.data.Dataset):
 
 
 def systematic_split(imgs, split_ratio=0.7, val_test_split=False):
-    # imgs = sorted(glob(root_dir + '/test/images' + '/*.tif'))
+    # imgs = sorted(glob(root_dir + '/images' + '/*.tif'))
     N = len(imgs)
 
     tr = round(N * split_ratio)
@@ -144,7 +144,7 @@ def systematic_split(imgs, split_ratio=0.7, val_test_split=False):
 
 
 def random_split(imgs, split_ratio=0.7, val_test_split=False):
-    # imgs = sorted(glob(root_dir + '/test/images' + '/*.tif'))
+    # imgs = sorted(glob(root_dir + '/images' + '/*.tif'))
     random.seed(0)
     N = len(imgs)
 
@@ -195,17 +195,17 @@ def main(args):
             pass
         else:
             print('Sampling for datset: {}'.format(fold))
-            imfs = os.listdir(f'{args.root}/{fold}/test/images')
-            lbls = os.listdir(f'{args.root}/{fold}/test/labels')
+            imfs = os.listdir(f'{args.root}/{fold}/images')
+            lbls = os.listdir(f'{args.root}/{fold}/labels')
 
             file_names = list(set(imfs).intersection(lbls))
 
-            images = [f'{args.root}/{fold}/test/images/{im}' for im in file_names]
-            labels = [f'{args.root}/{fold}/test/labels/{im}' for im in file_names]
+            images = [f'{args.root}/{fold}/images/{im}' for im in file_names]
+            labels = [f'{args.root}/{fold}/labels/{im}' for im in file_names]
 
             assert len(images) == len(
                 labels), f'The length of images {len(images)} and the length of labels {len(labels)} is not the same!'
-            # labels = glob(f'{args.root}/{fold}/test/labels/*.tif')
+            # labels = glob(f'{args.root}/{fold}/labels/*.tif')
 
             if args.sample_type == 'systematic':
                 train_f, valid_f = systematic_split(images, split_ratio=args.train_ratio, val_test_split=False)
