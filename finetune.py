@@ -115,7 +115,7 @@ class CampDataset(torch.utils.data.Dataset):
         return len(self.imgs)
     
 def systematic_split(imgs,split_ratio= 0.7, val_test_split=False, val_ratio=None):
-    #imgs = sorted(glob(root_dir + '/test/images' + '/*.tif'))
+    #imgs = sorted(glob(root_dir + '/images' + '/*.tif'))
     N = len(imgs)
     
     tr = int(N*split_ratio)
@@ -149,7 +149,7 @@ def systematic_split(imgs,split_ratio= 0.7, val_test_split=False, val_ratio=None
         return (tr_im, tr_lb), (val_ts_im, val_ts_lb)
 
 def random_split(imgs,split_ratio= 0.7, val_test_split=False, val_ratio=None):
-    #imgs = sorted(glob(root_dir + '/test/images' + '/*.tif'))
+    #imgs = sorted(glob(root_dir + '/images' + '/*.tif'))
     random.seed(0)
     N = len(imgs)
 
@@ -212,18 +212,18 @@ def main(args):
         #     print(f'{fold} --> ignored for testing')
         #     pass
         # else:
-        imfs = os.listdir(f'{args.root}/{fold}/test/images')
-        lbls = os.listdir(f'{args.root}/{fold}/test/labels')
+        imfs = os.listdir(f'{args.root}/{fold}/images')
+        lbls = os.listdir(f'{args.root}/{fold}/labels')
 
 
         file_names = list(set(imfs).intersection(lbls))
 
-        images = [f'{args.root}/{fold}/test/images/{im}' for im in file_names]
-        labels = [f'{args.root}/{fold}/test/labels/{im}' for im in file_names]
+        images = [f'{args.root}/{fold}/images/{im}' for im in file_names]
+        labels = [f'{args.root}/{fold}/labels/{im}' for im in file_names]
 
         assert len(images) == len(
             labels), f'The length of images {len(images)} and the length of labels {len(labels)} is not the same!'
-        # labels = glob(f'{args.root}/{fold}/test/labels/*.tif')
+        # labels = glob(f'{args.root}/{fold}/labels/*.tif')
 
         if args.validate:
             if args.sample_type == 'systematic':
@@ -331,8 +331,8 @@ def main(args):
 
 def parse_args():
     parser = argparse.ArgumentParser('MaskRCNN')
-    parser.add_argument("--save_dir", type=str, default="/home/getch/ssl/MaskRCNN_output/model")
-    parser.add_argument('--root', type=str, default="/home/getch/DATA/VAE/data") # data root
+    parser.add_argument("--save_dir", type=str, default="/MaskRCNN_output/model")
+    parser.add_argument('--root', type=str, default="/DATA") # data root
     parser.add_argument('--lr', type=float, default=0.001)
     parser.add_argument('--epochs', type=int, default=50)
     parser.add_argument('--train_batch', type=int, default=12)
