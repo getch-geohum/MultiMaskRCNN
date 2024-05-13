@@ -243,7 +243,17 @@ def main(args):
 
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = torch.optim.SGD(params, lr=args.lr, momentum=0.9, weight_decay=0.0005)
-    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1)
+    #lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1)
+    if args.lr_scheduler is not None:
+        print(f"Training will proceed with {args.lr_scheduler} learning rate schedule")
+        if args.lr_scheduler == 'cosine':
+            lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=1000, eta_min=0, last_epoch=-1)
+        elif args.lr_scheduler == 'cosinewarm':
+            lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer=optimizer, T_0=10)
+        elif args.lr_scheduler == 'linear':
+            lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1)
+    else:
+        print('No learning rate scheduler is specified! The same learning rate will be used throughout all trainbing steps')
 
     # early stoping and validation
     # notes either using loss or accuray to track learning process
@@ -258,7 +268,11 @@ def main(args):
     monitor = 0
     for epoch in range(1, args.epochs + 1):
         train_one_epoch(model, optimizer, train_dataloader, device, epoch, print_freq=10)
-        lr_scheduler.step()
+        if args.lr_scheduler is not None:
+            if args.lr_scheduler == 'cosinewarm':
+                lr_scheduler.step(epoch)
+            else:
+                lr_scheduler.step()
         if args.validate:
             if args.val_type == 'accuracy':
                 _, val_metric = evaluate(model=model, data_loader=valid_dataloader,
@@ -288,9 +302,10 @@ def main(args):
 
 def parse_args():
     parser = argparse.ArgumentParser('MaskRCNN')
-    parser.add_argument("--save_dir", type=str, default="/MaskRCNN_output/model_f")
-    parser.add_argument('--root', type=str, default="/DATA/VAE/data")  # data root
+    parser.add_argument("--save_dir", type=str, default="/home/getch/ssl/MaskRCNN_output/model_f")
+    parser.add_argument('--root', type=str, default="/home/getch/DATA/VAE/data")  # data root
     parser.add_argument('--lr', type=float, default=0.001)
+    parser.add_argument('--lr_scheduler', type=str, default=None)
     parser.add_argument('--epochs', type=int, default=50)
     parser.add_argument('--train_batch', type=int, default=12)
     parser.add_argument('--valid_batch', type=int, default=12)
