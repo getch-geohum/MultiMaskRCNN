@@ -6,6 +6,7 @@ train_configs = {"save_dir":"/home/getch/ssl/MaskRCNN_output/model_final",   # d
                  "root":"/home/getch/DATA/VAE/data",       # data root where training data is saved
                  "lr":0.001,
                  "epochs":50,
+                 "lr_scheduler":None,
                  "train_batch":12,
                  "valid_batch":12,
                  "ignore":"Minawao_june_2016",
