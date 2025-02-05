@@ -19,6 +19,6 @@ for finetuning
 
 ```python finetune.py ```
 
-# Usage for sample preparation for finetuning
+# Usage for sample preparation for further finetuning on selected few samples
 
 In the folder "ArcGISSamplingtool" there is a "data_preparation.pyt" file containing custom sampling tools usable in the ArcGIS Pro environment. Simply link the folder in the ArcGIS Pro catalogue pane and see the functionality and run Python toolboxes for custom fishnet creation as per the input image, intended individual sample chip size, then select representative polygons where selected digitization could happen. 
