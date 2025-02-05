@@ -1,7 +1,7 @@
 This repository trains MaskRCNN for instance segmentation of dwelling objects from different FDP settlement areas. This is an improved version of [Mapping of Dwellings in IDP/Refugee Settlements from Very High-Resolution Satellite Imagery Using a Mask Region-Based Convolutional Neural Network](https://doi.org/10.3390/rs14030689) where the training scheme accounts not only performing classical transfer learning from pretrained weights for combining datasets from different geography and time. This enables not only using pre-trained weight from non-earth observation imagery, it provides ways to properly combine and train on different datasets. It also combines further sampling tools for custom sample selection.
 
 # Instllation
-to create the environment follow the instructions on "Instruction_Manual.pdf"
+to create the environment follow the instructions on [Instruction_Manual.pdf](https://github.com/getch-geohum/MultiMaskRCNN/blob/master/Installation_Mannual.pdf).
 
 ## Usage 
 First, try to change parameters inthe  configs.py file and then 
