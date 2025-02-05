@@ -302,8 +302,8 @@ def main(args):
 
 def parse_args():
     parser = argparse.ArgumentParser('MaskRCNN')
-    parser.add_argument("--save_dir", type=str, default="/home/getch/ssl/MaskRCNN_output/model_f")
-    parser.add_argument('--root', type=str, default="/home/getch/DATA/VAE/data")  # data root
+    parser.add_argument("--save_dir", type=str, default="/MaskRCNN_output/model_f")
+    parser.add_argument('--root', type=str, default="/data")  # data root
     parser.add_argument('--lr', type=float, default=0.001)
     parser.add_argument('--lr_scheduler', type=str, default=None)
     parser.add_argument('--epochs', type=int, default=50)
