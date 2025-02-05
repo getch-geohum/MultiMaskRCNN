@@ -4,14 +4,14 @@ This repository trains MaskRCNN for instance segmentation of dwelling objects fr
 to create the environment follow the instructions on [Instruction_Manual.pdf](https://github.com/getch-geohum/MultiMaskRCNN/blob/master/Installation_Mannual.pdf).
 
 ## Usage 
-First, try to change parameters inthe  configs.py file and then 
+First, try to change parameters in the  configs.py file and then 
 
 for training
 
 
 ```python train.py```
 
-for testing
+for testing with geospatial outputs
 
 ```python geopredict.py```
 
